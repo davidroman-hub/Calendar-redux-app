@@ -8,6 +8,7 @@ import 'moment/locale/es'; // to change the langue
 
 import Navbar from '../ui/Nabvar';
 import {messages} from '../../helpers/calendar-messages-es';
+import{CalendarEvent} from './CalendarEvent';
 
 
 const localizer = momentLocalizer(moment) // or globalizeLocalizer
@@ -19,7 +20,11 @@ const events = [{
     start: moment().toDate(),
     end: moment().add(2, 'hours').toDate(),
     bgColor:'#fafafa',
-    notes:'Comprar el pastel'
+    notes:'Comprar el pastel',
+    user:{
+        _id:'123',
+        name:'David'
+    }
 }]
 
 export const CalendarScreen = () => {
@@ -52,7 +57,10 @@ export const CalendarScreen = () => {
                     startAccessor="start"
                     endAccessor="end"
                     messages = {messages} // to change the langue 
-                    eventPropGetter={eventStylesGetter}
+                    eventPropGetter={eventStylesGetter}// to ad props in this moment styles
+                    components={{
+                        event:CalendarEvent
+                    }}
                 />
 
         </div>
