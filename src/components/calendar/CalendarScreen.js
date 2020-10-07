@@ -14,6 +14,18 @@ import{CalendarEvent} from './CalendarEvent';
 const localizer = momentLocalizer(moment) // or globalizeLocalizer
 moment.locale('es')
 
+const onDoubleClick = (e) => {
+    console.log(e)
+}
+
+const onSelectEvents = (e) => {
+    console.log(e)
+}
+
+const onViewChange = (e) => {
+    console.log(e)
+}
+
 
 const events = [{
     title:'Cumple del jefe',
@@ -32,7 +44,7 @@ export const CalendarScreen = () => {
 
     const eventStylesGetter = (event, start, end, isSelected) => {
         //styles 
-        console.log(event, start, end, isSelected)
+        //console.log(event, start, end, isSelected)
         const style ={
             backgroundColor:'#367CF7',
             borderRadius:'0px',
@@ -58,6 +70,9 @@ export const CalendarScreen = () => {
                     endAccessor="end"
                     messages = {messages} // to change the langue 
                     eventPropGetter={eventStylesGetter}// to ad props in this moment styles
+                    onDoubleClickEvent={ onDoubleClick}
+                    onSelectEvent={onSelectEvents}
+                    onView={onViewChange}
                     components={{
                         event:CalendarEvent
                     }}
