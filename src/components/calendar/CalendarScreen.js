@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Calendar,  momentLocalizer} from 'react-big-calendar';
 
 import moment from 'moment';
@@ -14,17 +14,6 @@ import{CalendarEvent} from './CalendarEvent';
 const localizer = momentLocalizer(moment) // or globalizeLocalizer
 moment.locale('es')
 
-const onDoubleClick = (e) => {
-    console.log(e)
-}
-
-const onSelectEvents = (e) => {
-    console.log(e)
-}
-
-const onViewChange = (e) => {
-    console.log(e)
-}
 
 
 const events = [{
@@ -41,6 +30,21 @@ const events = [{
 
 export const CalendarScreen = () => {
     
+    const [lastView, setLastView] = useState( localStorage.getItem('lastView') || 'month')
+    
+    const onDoubleClick = (e) => {
+        console.log(e)
+    }
+
+    const onSelectEvents = (e) => {
+        console.log(e)
+    }
+
+    const onViewChange = (e) => {
+        setLastView(e)
+        //console.log(e)
+        localStorage.setItem('lastView', e);
+    }
 
     const eventStylesGetter = (event, start, end, isSelected) => {
         //styles 
@@ -73,6 +77,7 @@ export const CalendarScreen = () => {
                     onDoubleClickEvent={ onDoubleClick}
                     onSelectEvent={onSelectEvents}
                     onView={onViewChange}
+                    view={lastView}
                     components={{
                         event:CalendarEvent
                     }}
